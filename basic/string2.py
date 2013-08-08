@@ -16,8 +16,12 @@
 # If the string length is less than 3, leave it unchanged.
 # Return the resulting string.
 def verbing(s):
-  # +++your code here+++
-  return
+  if s[-3:] == 'ing':
+    return s + 'ly'
+  elif len(s) >= 3:
+    return s + 'ing'
+  elif len(s) <3:
+    return s
 
 
 # E. not_bad
@@ -29,8 +33,18 @@ def verbing(s):
 # So 'This dinner is not that bad!' yields:
 # This dinner is good!
 def not_bad(s):
-  # +++your code here+++
-  return
+  try:
+    bad_i = s.index('bad')
+  except ValueError:
+    bad_i = 0
+  try:
+    not_i = s.index('not')
+  except ValueError:
+    not_i = 0
+  if (bad_i > not_i):
+    return s[0:not_i] + 'good' + s[bad_i+3:]
+  else:
+    return s
 
 
 # F. front_back
@@ -41,8 +55,34 @@ def not_bad(s):
 # Given 2 strings, a and b, return a string of the form
 #  a-front + b-front + a-back + b-back
 def front_back(a, b):
-  # +++your code here+++
-  return
+  a_split = 0
+  a_front = ''
+  a_back = ''
+  b_split = 0
+  b_bront = ''
+  b_back = ''
+  a_is_odd = len(a)%2
+  b_is_odd = len(b)%2
+  # test(front_back('abcde', 'xyz'), 'abcxydez')
+  # a_odd remainder is 0, must be even
+  if a_is_odd == 0: 
+    a_split = (len(a)/2)
+    a_front = a[:a_split]
+    a_back = a[a_split:]
+  else:
+    a_split = (len(a)/2)+1
+    a_front = a[:a_split]
+    a_back = a[a_split:]
+  # b_odd remainder is 0, must be even
+  if b_is_odd == 0:
+    b_split = (len(b)/2)
+    b_front = b[:b_split]
+    b_back = b[b_split:]
+  else:
+    b_split = (len(b)/2)+1
+    b_front = b[:b_split]
+    b_back = b[b_split:]
+  return a_front + b_front + a_back + b_back
 
 
 # Simple provided test() function used in main() to print
